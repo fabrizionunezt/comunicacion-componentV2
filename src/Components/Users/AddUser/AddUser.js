@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Wrapper from "../../Helpers/Wrappers";
 import Button from "../../UI/Button/Button";
 import Card from "../../UI/Card/Card";
@@ -6,13 +6,16 @@ import Modal from "../../UI/Modal/Modal";
 import styles from "./AddUser.module.css";
 
 const AddUser = (props) => {
-  const [userName, setUserName] = useState("");
-  const [age, setAge] = useState("");
+  const userNameRef = useRef();
+  const userAgeRef = useRef();
+
   const [errorMessage, setErrorMessage] = useState("Something went wrong!");
   const [isError, setIsError] = useState(false);
 
   const addUserHandler = (event) => {
     event.preventDefault();
+    const userName = userNameRef.current.value;
+    const age = userAgeRef.current.value;
     if (userName.trim().length === 0 || age.trim().length === 0) {
       setIsError(true);
       setErrorMessage("There are some incomplete fields!");
@@ -29,16 +32,8 @@ const AddUser = (props) => {
       age: age,
     };
     props.onAddUserHandler(user);
-    setAge("");
-    setUserName("");
-  };
-
-  const userNameChangeHandler = (event) => {
-    setUserName(event.target.value);
-  };
-
-  const ageChangeHandler = (event) => {
-    setAge(event.target.value);
+    userNameRef.current.value = "";
+    userAgeRef.current.value = "";
   };
 
   const onCloseModalHandler = () => {
@@ -57,19 +52,9 @@ const AddUser = (props) => {
       <Card className={styles.input}>
         <form onSubmit={addUserHandler}>
           <label htmlFor="username">Username</label>
-          <input
-            onChange={userNameChangeHandler}
-            value={userName}
-            id="username"
-            type="text"
-          ></input>
+          <input id="username" type="text" ref={userNameRef}></input>
           <label htmlFor="age">Age (Years)</label>
-          <input
-            onChange={ageChangeHandler}
-            value={age}
-            id="age"
-            type="number"
-          ></input>
+          <input id="age" type="number" ref={userAgeRef}></input>
           <Button type="submit">Add User</Button>
         </form>
       </Card>
