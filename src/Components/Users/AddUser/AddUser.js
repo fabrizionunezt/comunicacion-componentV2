@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Wrapper from "../../Helpers/Wrappers";
 import Button from "../../UI/Button/Button";
 import Card from "../../UI/Card/Card";
 import Modal from "../../UI/Modal/Modal";
@@ -45,7 +46,7 @@ const AddUser = (props) => {
   };
 
   return (
-    <div>
+    <Wrapper>
       {isError && (
         <Modal
           onCloseModalHandler={onCloseModalHandler}
@@ -72,7 +73,7 @@ const AddUser = (props) => {
           <Button type="submit">Add User</Button>
         </form>
       </Card>
-    </div>
+    </Wrapper>
   );
 };
 

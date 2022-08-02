@@ -12,10 +12,10 @@ const Users = () => {
   };
 
   return (
-    <div>
+    <>
       <AddUser onAddUserHandler={onAddUserHandler} />
       <UserList onDeleteUser={onDeleteUser} users={users} />
-    </div>
+    </>
   );
 };
 export default Users;

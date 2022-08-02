@@ -1,13 +1,14 @@
 import styles from "./Modal.module.css";
 import Card from "../Card/Card";
 import Button from "../Button/Button";
+import { Fragment } from "react";
 
 const Modal = (props) => {
   const onCloseModalHandler = () => {
     props.onCloseModalHandler();
   };
   return (
-    <div>
+    <Fragment>
       <div onClick={onCloseModalHandler} className={styles.backdrop} />
       <Card className={styles.modal}>
         <header className={styles.header}>
@@ -20,7 +21,7 @@ const Modal = (props) => {
           <Button onClick={onCloseModalHandler}>Entendido</Button>
         </footer>
       </Card>
-    </div>
+    </Fragment>
   );
 };
 
